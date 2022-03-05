@@ -1,0 +1,36 @@
+body {
+    font-size: 1.1rem;
+    font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+    background-color: beige;
+}
+
+.container {
+    width: 600px;
+    margin:0 auto;
+}
+
+h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid black;
+
+}
+
+select {
+    font-size: 1rem;
+    border: 1px black solid;
+}
+
+input {
+    line-height: 1.5em;
+    border: 1px black solid;
+}
+
+.form-unit {
+    border: 1px solid black;
+    margin: 1em 0;
+    text-align: center;
+}

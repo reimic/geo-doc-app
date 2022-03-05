@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Kalkulator Parametrów</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Kalkulator Parametrów Geotechnicznych</h1>
+            <form>
+                <div class = "form-unit">
+                <label for="rockType">Rodzaj gruntu:</label>
+                <select id="rockType">
+                    <option value = "spoisty">spoisty</option>
+                    <option value = "niespoisty">niespoisty</option>
+                </select>
+                </div>
+
+                <div class = "form-unit">
+                    <label for="litology">Litologia:</label>
+                    <select id="litology">
+                    </select>
+                    </div>
+
+                <div class = "form-unit">
+                <label id = "par-char-lbl" for = "par-char"></label>
+                <input id = "par-char" type = "number" min = "0" max = "1" step = "0.01">
+                </div>
+            </form>
+            <footer>
+                Na podstawie:
+            </footer>
+        </div>
+    </body>
+    <script src = "index.js"></script>
+</html>
