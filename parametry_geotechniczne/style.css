@@ -65,6 +65,7 @@ header p:first-child {
     color: aliceblue;
     border: none;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .basic-input{
@@ -79,8 +80,4 @@ header p:first-child {
     height: 8rem;
     word-wrap: normal !important;
     white-space: normal;
-}
-
-.output-section {
-
 }
