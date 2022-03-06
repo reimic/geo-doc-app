@@ -2,9 +2,11 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin:0;
+    margin: 0;
     background-color: beige;
+    text-align: center;
 }
+
 
 h1 {
     font-size: 2rem;
@@ -23,29 +25,32 @@ header p:first-child {
     display: flex;
     justify-items: center;
     align-items: center;
-    max-width: 800px;
     margin: 0 auto;
 }
 
 .header{
     flex-direction: column;
+    max-width: 900px;
 }
 
 .input-section {
     flex-direction: column;
-    align-items: flex-start;
+    max-width: 1100px;
 
 }
 
 .parts {
-
+    border: 1px solid black;
+    align-items: stretch;
+    gap: 2rem;
 }
 
 .part {
+    padding: 1rem;
+
     flex-direction: column;
-    width: 210px;
-    padding: 1rem 1.75rem;
-    margin: 0 1rem;
+    width: 22%;
+    min-width: 240px;
     background-color: blanchedalmond;
 }
 
@@ -55,44 +60,27 @@ header p:first-child {
 
 .basic-button {
     padding: 1rem 1.75rem;
-    width: 100%;
+    width: 70%;
     background-color: cadetblue;
     color: aliceblue;
     border: none;
     font-size: 1.5rem;
 }
 
+.basic-input{
+    font-size: 4rem;
+    width: 70%;
+    height: 8rem;
+}
 
+.basic-select {
+    font-size: 1.5rem;
+    width: 70%;
+    height: 8rem;
+    word-wrap: normal !important;
+    white-space: normal;
+}
 
 .output-section {
 
-}
-
-/* form design */
-
-select {
-    font-size: 1rem;
-    border: 1px black solid;
-}
-
-input {
-    line-height: 1.5em;
-    border: 1px black solid;
-}
-
-.form-unit {
-    border: 1px solid black;
-    margin: 1em 0;
-    text-align: center;
-}
-
-.output {
-    
-}
-
-.singular-output {
-    margin: 1rem;
-    width: 22%;
-    height: 100px;
-    background-color: blanchedalmond;
 }
