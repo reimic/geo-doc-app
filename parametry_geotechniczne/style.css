@@ -1,36 +1,86 @@
+/* typography */
+
 body {
-    font-size: 1.1rem;
-    font-family:Arial, Helvetica, sans-serif;
-    margin:0;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
     background-color: beige;
+    text-align: center;
 }
 
-.container {
-    width: 600px;
-    margin:0 auto;
-}
 
 h1 {
     font-size: 2rem;
     text-transform: uppercase;
-    text-align: center;
+    margin: 2rem auto 0.3rem;
+}
+
+header p:first-child {
+    font-size: 1.3rem;
+    margin: 0rem auto 1rem;
+}
+
+/* main layout */
+
+.flex {
+    display: flex;
+    justify-items: center;
+    align-items: center;
     margin: 0 auto;
+}
+
+.header{
+    flex-direction: column;
+    max-width: 900px;
+}
+
+.input-section {
+    flex-direction: column;
+    max-width: 1100px;
+
+}
+
+.parts {
     border: 1px solid black;
-
+    align-items: stretch;
+    gap: 2rem;
 }
 
-select {
-    font-size: 1rem;
-    border: 1px black solid;
+.part {
+    padding: 1rem;
+
+    flex-direction: column;
+    width: 22%;
+    min-width: 240px;
+    background-color: blanchedalmond;
 }
 
-input {
-    line-height: 1.5em;
-    border: 1px black solid;
+.part h3 {
+    margin: 0;
 }
 
-.form-unit {
-    border: 1px solid black;
-    margin: 1em 0;
-    text-align: center;
+.basic-button {
+    padding: 1rem 1.75rem;
+    width: 70%;
+    background-color: cadetblue;
+    color: aliceblue;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.basic-input{
+    font-size: 4rem;
+    width: 70%;
+    height: 8rem;
+}
+
+.basic-select {
+    font-size: 1.5rem;
+    width: 70%;
+    height: 8rem;
+    word-wrap: normal !important;
+    white-space: normal;
+}
+
+.output-section {
+
 }
