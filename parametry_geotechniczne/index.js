@@ -1,7 +1,7 @@
 // relations
 const buttonSpoisty = document.getElementById("button-spoisty")
 const buttonNiespoisty = document.getElementById("button-niespoisty")
-const litology = document.getElementById("litology")
+const buttonOblicz = document.getElementById("button-oblicz")
 const outputC = document.getElementById("output-c")
 const outputFi = document.getElementById("output-fi")
 const outputM0 = document.getElementById("output-M0")
@@ -17,6 +17,8 @@ const gruntySpoiste = ["piaski gliniaste i pyły", "gliny piaszczyste, gliny i g
 
 
 
+const myHonda = {color: 'red', one: {cylinders: 4, size: 2.2}, two: {cylinders: 5, size: 2.2}, 
+three: {cylinders: 6, size: 2.2}};
 
 
 
@@ -28,19 +30,34 @@ const tabelaGlinyGlinyZwiezleIly = {1.00: 0.4700, 0.99: 0.4780, 0.98: 0.4860, 0.
 
 //example 
 
-const examplePospolkiZwiry = [{ID: 0.01, E0: 2, delta: 3, c: 4, fi: 5, E: 6, M: 7},
-    {ID: 0.02, E0: 3, delta: 4, c: 5, fi: 6, E: 7, M: 8}]
+const examplePospolkiZwiry = [
+    {litologia: "żwiry i pospółki", 
+    parametry: [{ID: 0.01, E0: 2, delta: 3, c: 4, fi: 5, E: 6, M: 7},
+    {ID: 0.02, E0: 3, delta: 4, c: 5, fi: 6, E: 7, M: 8}]},
+    {litologia: "piaski grube i średnie", 
+    parametry: [{ID: 0.01, E0: 2, delta: 3, c: 4, fi: 5, E: 6, M: 7},
+    {ID: 0.02, E0: 3, delta: 4, c: 5, fi: 6, E: 7, M: 8}]}
+]
 
 const examplePiaskiGrubeSrednie = [{ID: 0.01, E0: 2, delta: 3, c: 4, fi: 5, E: 6, M: 7},
         {ID: 0.02, E0: 3, delta: 4, c: 5, fi: 6, E: 7, M: 8}]
 
-function showParameters() {
-    if (litology.value === "żwiry i pospółki" && parChar.value === examplePospolkiZwiry.ID) {
-        outputC.innerHTML = `<p>Spójność gruntu c [kPa]</p>
-        <h3>${examplePospolkiZwiry.c}</h3>`
+function showParameters(data) { for (let i=0; i<data.length; i++) {
+        if (parameterInputField.value == data[i].ID) {
+        outputC.innerHTML = `<p> Spójność gruntu c [kPa]</p>
+        <h3>${data[i].c}</h3>`
 
+        outputFi.innerHTML = `<p> Kąt tarcia wewnętrznego f [o]</p>
+        <h3>${data[i].fi}</h3>`
+
+        outputM0.innerHTML = `<p> Edometryczny moduł ściśliwości pierwotnej M [kPa]</p>
+        <h3>${data[i].M}</h3>`
+
+        outputE0.innerHTML = `<p> Edometryczny moduł odkształcenia pierwotnego E [kPa]</p>
+        <h3>${data[i].E}</h3>`
+        break
+        }
     }
-    console.log(examplePospolkiZwiry.ID)
 }
 
 
@@ -72,22 +89,14 @@ function showGruntyNiespoiste() {
 }
 
 
-
-
-/* initial setting */
-
-changeRockType()
-createLitologyOpt()
-
 /* events */
 
-rockType.addEventListener("change", function() {
-    changeRockType()
-    clearLitologyOpt()
-    createLitologyOpt()
-})
-
-submitBtn.addEventListener("click", function() {
-    showParameters()
-    console.log("clicked")
+buttonOblicz.addEventListener("click", function() {
+    if (litologySelect.value === examplePospolkiZwiry) {showParameters(examplePospolkiZwiry)}
+    else if (litologySelect.value === gruntyNiespoiste[1]) {showParameters(examplePiaskiGrubeSrednie)}
+    else if (litologySelect.value ===  gruntyNiespoiste[2]) {}
+    else if (litologySelect.value === gruntySpoiste[0]) {}
+    else if (litologySelect.value === gruntySpoiste[1]) {}
+    else if (litologySelect.value ===  gruntySpoiste[2]) {}
+    else if (litologySelect.value === gruntySpoiste[3]) {}
 })
