@@ -33,7 +33,7 @@ const data = [
 
 // Data: position in array parallels to ID / IL parameter. 
 // Relation is fixed on equation:
-// a = ((parameterInputField * 100) / 20) -1, a - position in array for gruntyNiespoiste category
+// a = ((parameterInputField * 100) -20), a - position in array for gruntyNiespoiste category
 // b = (parameterInputField * 100), b - position in array for gruntySpoiste category
 
 /* functions */
@@ -53,21 +53,18 @@ function generateOptions(cohesion, parameter, minRange, maxRange) {
 
 
 function showParameters(param) {
-    let litologySelectValue = litologySelect.value
-    let ID = parseFloat(parameterInputField.value)*100/20-1
-    let IL = parseFloat(parameterInputField.value)*100
+  const litologySelectValue = litologySelect.value
+  outputC.innerHTML = `<p> Spójność gruntu c [kPa]</p>
+  <h3>${data[litologySelectValue].parameters[param].C}</h3>`
 
-        outputC.innerHTML = `<p> Spójność gruntu c [kPa]</p>
-        <h3>${data[litologySelectValue].parameters[param].C}</h3>`
+  outputFi.innerHTML = `<p> Kąt tarcia wewnętrznego f [o]</p>
+  <h3>${data[litologySelectValue].parameters[param].Fi}</h3>`
 
-        outputFi.innerHTML = `<p> Kąt tarcia wewnętrznego f [o]</p>
-        <h3>${data[litologySelectValue].parameters[param].Fi}</h3>`
+  outputM0.innerHTML = `<p> Edometryczny moduł ściśliwości pierwotnej M0 [kPa]</p>
+  <h3>${data[litologySelectValue].parameters[param].M0}</h3>`
 
-        outputM0.innerHTML = `<p> Edometryczny moduł ściśliwości pierwotnej M0 [kPa]</p>
-        <h3>${data[litologySelectValue].parameters[param].M0}</h3>`
-
-        outputE0.innerHTML = `<p> Edometryczny moduł odkształcenia pierwotnego E0 [kPa]</p>
-        <h3>${data[litologySelectValue].parameters[param].E0}</h3>` 
+  outputE0.innerHTML = `<p> Edometryczny moduł odkształcenia pierwotnego E0 [kPa]</p>
+  <h3>${data[litologySelectValue].parameters[param].E0}</h3>` 
 }
 
 /* events */
@@ -82,6 +79,9 @@ buttonNiespoisty.addEventListener("click", function(){
 
 
 buttonOblicz.addEventListener("click", function() {
+  const litologySelectValue = litologySelect.value
+  const ID = parseFloat(parameterInputField.value)*100-20
+  const IL = parseFloat(parameterInputField.value)*100
     if (data[litologySelectValue].cohesion === "niespoiste") {
         showParameters(ID)
     } else {
