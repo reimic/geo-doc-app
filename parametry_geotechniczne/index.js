@@ -54,27 +54,35 @@ function generateOptions(cohesion, parameter, minRange, maxRange) {
 
 function showParameters(param) {
   const litologySelectValue = litologySelect.value
-  outputC.innerHTML = `<p> Spójność gruntu c [kPa]</p>
-  <h3>${data[litologySelectValue].parameters[param].C}</h3>`
 
-  outputFi.innerHTML = `<p> Kąt tarcia wewnętrznego f [o]</p>
-  <h3>${data[litologySelectValue].parameters[param].Fi}</h3>`
+  outputC.innerHTML = data[litologySelectValue].parameters[param].C
+  outputFi.innerHTML = data[litologySelectValue].parameters[param].Fi
+  outputM0.innerHTML = data[litologySelectValue].parameters[param].M0
+  outputE0.innerHTML = data[litologySelectValue].parameters[param].E0
+}
 
-  outputM0.innerHTML = `<p> Edometryczny moduł ściśliwości pierwotnej M0 [kPa]</p>
-  <h3>${data[litologySelectValue].parameters[param].M0}</h3>`
-
-  outputE0.innerHTML = `<p> Edometryczny moduł odkształcenia pierwotnego E0 [kPa]</p>
-  <h3>${data[litologySelectValue].parameters[param].E0}</h3>` 
+function clearParameters() {
+  outputC.innerHTML = "-"
+  outputFi.innerHTML = "-"
+  outputM0.innerHTML = "-"
+  outputE0.innerHTML = "-"
 }
 
 /* events */
 
+litologySelect.addEventListener("click", function() {
+  clearParameters()
+  console.log("clicked")
+})
+
 buttonSpoisty.addEventListener("click", function(){
     generateOptions("spoiste", "plastyczności", 0.00, 0.75)
+    clearParameters()
 })
 
 buttonNiespoisty.addEventListener("click", function(){
     generateOptions("niespoiste", "zagęszczenia", 0.20, 1.00)
+    clearParameters()
 })
 
 
