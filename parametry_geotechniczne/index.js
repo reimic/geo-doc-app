@@ -67,6 +67,15 @@ litologySelect.addEventListener("click", function() {
   clearParameters()
 })
 
+parameterInputField.addEventListener("keydown",(event) => {
+  if (event.key === "Enter"){
+    event.preventDefault()
+    renderParameters()
+  } else if (event.key === "Backspace"){
+    clearParameters()
+  }
+})
+
 buttonSpoisty.addEventListener("click", function(){
     generateOptions("spoiste", "plastyczności", 0.00, 0.75)
     clearParameters()
