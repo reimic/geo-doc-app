@@ -52,12 +52,23 @@ function clearParameters() {
 }
 
 function renderParameters() {
-  const ID = (parameterInputField.value * 100 - 20).toFixed(0);
-  const IL = (parameterInputField.value * 100).toFixed(0);
-  if (data[litologySelect.value].cohesion === "niespoiste") {
-    showParameters(ID);
-  } else {
-    showParameters(IL);
+  try{
+    const ID = (parameterInputField.value * 100 - 20).toFixed(0);
+    const IL = (parameterInputField.value * 100).toFixed(0);
+    if (data[litologySelect.value].cohesion === "niespoiste") {
+      showParameters(ID);
+    } else {
+      showParameters(IL);
+    }
+  } catch (err) {
+    console.error(err);
+    const errorMessage = document.createElement("div")
+    errorMessage.classList.add("message");
+    errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    document.body.appendChild(errorMessage);
+    setTimeout(() => {
+      document.body.removeChild(errorMessage)        
+    }, 1500);
   }
 }
 
@@ -70,18 +81,7 @@ litologySelect.addEventListener("click", function () {
 parameterInputField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
-    try{
-      renderParameters();
-    } catch (err) {
-      console.error(err);
-      const errorMessage = document.createElement("div")
-      errorMessage.classList.add("message");
-      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
-      document.body.appendChild(errorMessage);
-      setTimeout(() => {
-        document.body.removeChild(errorMessage)        
-      }, 1500);
-    }
+    renderParameters();
   } else if (event.key === "Backspace") {
     clearParameters();
   }
