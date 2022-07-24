@@ -39,6 +39,10 @@ header p:first-child {
 
 }
 
+@media screen (min-width: 900px) {
+    
+}
+
 .parts {
     align-items: stretch;
     gap: 2rem;
