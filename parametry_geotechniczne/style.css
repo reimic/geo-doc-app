@@ -26,51 +26,30 @@ header p:first-child {
 .header{
     flex-direction: column;
 }
-.section-input {
+.section--basic{
     flex-direction: column;
     width: 100%;
 }
-.section-input__title {
-}
-.section-input__containter-steps{
+.containter--basic{
     flex-direction: column;
     align-items: stretch;
     width: 100%;
 }
-.section-input__step {
+.element--basic{
     flex-direction: column;
-    justify-content: start;
-    background-color: #B7B7A4;
-    width: 90%;
     margin: 1rem;
     padding: 2rem 1rem;
 }
-.step__title {
-
+.section-input__step {
+    justify-content: start;
+    background-color: #B7B7A4;
 }
-.step__command {
-
+.section-output__part {
+    justify-content: space-between;
+    background-color: #DDBEA9;
 }
-
-
-
-
-
-.parts {
-    align-items: stretch;
-    gap: 2rem;
-}
-.part {
-    padding: 1rem;
-    flex-direction: column;
-    width: 22%;
-    min-width: 240px;
-    background-color: blanchedalmond;
-}
-.part h3 {
-    margin: 0;
-}
-.basic-button {
+/* interaction */
+.button--basic {
     padding: 1rem 1.75rem;
     width: 90%;
     text-transform: uppercase;
@@ -82,40 +61,31 @@ header p:first-child {
     font-size: 1rem;
     cursor: pointer;
 }
-.basic-input{
+.input--basic{
     font-size: 4rem;
     width: 70%;
     height: 8rem;
 }
-.basic-select {
+.select--basic {
     font-size: 1.5rem;
     width: 70%;
     height: 8rem;
     word-wrap: normal !important;
     white-space: normal;
 }
-.output-section {
-    flex-direction: column;
-    max-width: 1100px;
-}
-
-
-@media (min-width: 640px) {
-
-}
 
 @media (min-width: 768px) {
-    .section-input__containter-steps {
+    .containter--basic {
         flex-direction: row;
         flex-wrap: wrap;
     }
-    .section-input__step {
+    .element--basic {
         width: 45%;
     }
 }
 
 @media (min-width: 1024px) {
-    .section-input {
+    .section--basic {
         flex-direction: column;
         width: 900px;
         margin: 0 auto;
@@ -123,20 +93,16 @@ header p:first-child {
 }
 
 @media (min-width: 1280px) {
-    .section-input {
+    .section--basic {
         flex-direction: column;
         width: 1200px;
         margin: 0 auto;
     }
-    .section-input__containter-steps {
+    .containter--basic {
         flex-direction: row;
         flex-wrap: wrap;
     }
-    .section-input__step {
+    .element--basic {
         width: 22%;
     }
-}
-
-@media (min-width: 1536px) {
-
 }
