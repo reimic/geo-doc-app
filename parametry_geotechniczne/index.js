@@ -70,7 +70,18 @@ litologySelect.addEventListener("click", function () {
 parameterInputField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
-    renderParameters();
+    try{
+      renderParameters();
+    } catch (err) {
+      console.error(err);
+      const errorMessage = document.createElement("div")
+      errorMessage.classList.add("message");
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+      document.body.appendChild(errorMessage);
+      setTimeout(() => {
+        document.body.removeChild(errorMessage)        
+      }, 1500);
+    }
   } else if (event.key === "Backspace") {
     clearParameters();
   }
