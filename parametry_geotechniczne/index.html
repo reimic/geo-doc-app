@@ -10,12 +10,12 @@
             <h1>Kalkulator Parametrów Geotechnicznych</h1>
             <p>Na podstawie: [Książka]</p>
         </header>
-        <section class="flex input-section">
-            <h2>Wprowadź dane wejściowe:</h2>
-            <section class="flex parts">
-                <div class="flex part">
-                    <h3>Krok 1</h3>
-                    <p>Wskaż rodzaj gruntu:</p>
+        <section class="flex section-input">
+            <h2 class="section-input__title">Wprowadź dane wejściowe:</h2>
+            <div class="flex section-input__containter-steps">
+                <div class="flex section-input__step">
+                    <h3 class="step__title">Krok 1</h3>
+                    <p class="step__command">Wskaż rodzaj gruntu:</p>
                     <button class="basic-button" id="button-spoisty">
                         Spoisty
                     </button>
@@ -24,25 +24,25 @@
                         Niespoisty
                     </button>
                 </div>
-                <div class="flex part">
-                    <h3>Krok 2</h3>
-                    <p>Wskaż litologię:</p>
+                <div class="flex section-input__step">
+                    <h3 class="step__title">Krok 2</h3>
+                    <p class="step__command">Wskaż litologię:</p>
                     <select class="basic-select" id="litology"></select>
                 </div>
-                <div class="flex part">
-                    <h3>Krok 3</h3>
-                    <p id="parameter-input-field-label">Wprowadź parametr:</p>
+                <div class="flex section-input__step">
+                    <h3 class="step__title">Krok 3</h3>
+                    <p class="step__command" id="parameter-input-field-label">Wprowadź parametr:</p>
                     <form>
                     <input class="basic-input" id ="parameter-input-field" type = "number" min = "0" max = "1" step = "0.01">
                     <p id = "parameter-input-field-range">Wartość w przedziale:<br>od 0.00 do 1.00</p>
                     </form>
                 </div>
-                <div class="flex part">
-                    <h3>Krok 4</h3>
-                    <p>Zatwierdź dane:</p>
+                <div class="flex section-input__step">
+                    <h3 class="step__title">Krok 4</h3>
+                    <p class="step__command">Zatwierdź dane:</p>
                     <button class="basic-button" id ="button-oblicz">oblicz</button>
                 </div>
-            </section>
+            </div>
         </section>
 
         <h2>Dane wyjściowe:</h2>
