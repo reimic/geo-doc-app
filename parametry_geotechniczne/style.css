@@ -1,83 +1,72 @@
 /* typography */
-
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: beige;
+    background-color: #FFE8D6;
     text-align: center;
 }
-
-
 h1 {
     font-size: 2rem;
     text-transform: uppercase;
-    margin: 2rem auto 0.3rem;
+    margin: 2rem auto;
 }
-
 header p:first-child {
     font-size: 1.3rem;
-    margin: 0rem auto 1rem;
+    margin: 1rem auto;
 }
-
 /* main layout */
-
 .flex {
     display: flex;
-    justify-items: center;
     align-items: center;
-    margin: 0 auto;
+    justify-content: center;
 }
-
 .header{
     flex-direction: column;
-    max-width: 900px;
 }
-
-.input-section {
+.section--basic{
     flex-direction: column;
-    max-width: 1100px;
-
+    width: 100%;
 }
-
-@media screen (min-width: 900px) {
-    
-}
-
-.parts {
+.containter--basic{
+    flex-direction: column;
     align-items: stretch;
-    gap: 2rem;
+    width: 100%;
 }
-
-.part {
-    padding: 1rem;
-
+.element--basic{
     flex-direction: column;
-    width: 22%;
-    min-width: 240px;
-    background-color: blanchedalmond;
+    margin: 1rem;
+    padding: 2rem 1rem;
 }
-
-.part h3 {
-    margin: 0;
+.section-input__step {
+    justify-content: start;
+    background-color: #B7B7A4;
 }
-
-.basic-button {
+.section-output__part {
+    justify-content: space-between;
+    background-color: #DDBEA9;
+}
+/* interaction */
+.button--basic {
     padding: 1rem 1.75rem;
-    width: 70%;
-    background-color: cadetblue;
-    color: aliceblue;
+    width: 90%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    background-color: #6B705C;
+    color: white;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
 }
-
-.basic-input{
+.input--basic{
     font-size: 4rem;
     width: 70%;
     height: 8rem;
 }
-
-.basic-select {
+.select--basic {
     font-size: 1.5rem;
     width: 70%;
     height: 8rem;
@@ -85,7 +74,35 @@ header p:first-child {
     white-space: normal;
 }
 
-.output-section {
-    flex-direction: column;
-    max-width: 1100px;
+@media (min-width: 768px) {
+    .containter--basic {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .element--basic {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section--basic {
+        flex-direction: column;
+        width: 900px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1280px) {
+    .section--basic {
+        flex-direction: column;
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .containter--basic {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .element--basic {
+        width: 22%;
+    }
 }
