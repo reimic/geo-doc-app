@@ -6,7 +6,7 @@ const outputC = document.getElementById("output-c");
 const outputFi = document.getElementById("output-fi");
 const outputM0 = document.getElementById("output-M0");
 const outputE0 = document.getElementById("output-E0");
-const litologyButton = document.getElementById("litology");
+const litologySelect = document.getElementById("litology-select");
 const parameterInputField = document.getElementById("parameter-input-field");
 const parameterInputFieldLabel = document.getElementById(
   "parameter-input-field-label"
@@ -26,47 +26,61 @@ import { data } from "./data.js";
 /* functions */
 
 function generateOptions(cohesion, parameter, minRange, maxRange) {
-  litologyButton.innerHTML = "";
+  litologySelect.textContent = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i].cohesion === cohesion) {
-      let Opt = new Option(data[i].litology, i);
-      litologyButton.add(Opt);
+      const option = new Option(data[i].litology, i);
+      litologySelect.add(option);
     }
   }
   parameterInputFieldLabel.textContent = `Wprowadź stopień ${parameter}:`;
-  parameterInputFieldRange.innerHTML = `Wartość w przedziale:<br>od ${minRange} do ${maxRange}`;
+  parameterInputFieldRange.textContent = `Wartość w przedziale: od ${minRange.toFixed(2)} do ${maxRange.toFixed(2)}`;
 }
 
 function showParameters(param) {
-  const litologySelectValue = litologyButton.value;
-
-  outputC.innerHTML = data[litologySelectValue].parameters[param].C;
-  outputFi.innerHTML = data[litologySelectValue].parameters[param].Fi;
-  outputM0.innerHTML = data[litologySelectValue].parameters[param].M0;
-  outputE0.innerHTML = data[litologySelectValue].parameters[param].E0;
+  outputC.textContent = data[litologySelect.value].parameters[param].C;
+  outputFi.textContent = data[litologySelect.value].parameters[param].Fi;
+  outputM0.textContent = data[litologySelect.value].parameters[param].M0;
+  outputE0.textContent = data[litologySelect.value].parameters[param].E0;
 }
 
 function clearParameters() {
-  outputC.innerHTML = "-";
-  outputFi.innerHTML = "-";
-  outputM0.innerHTML = "-";
-  outputE0.innerHTML = "-";
+  outputC.textContent = "-";
+  outputFi.textContent = "-";
+  outputM0.textContent = "-";
+  outputE0.textContent = "-";
 }
 
 function renderParameters() {
-  const litologySelectValue = litologyButton.value;
-  const ID = (parameterInputField.value * 100 - 20).toFixed(0);
-  const IL = (parameterInputField.value * 100).toFixed(0);
-  if (data[litologySelectValue].cohesion === "niespoiste") {
-    showParameters(ID);
-  } else {
-    showParameters(IL);
+  try{
+    const ID = (parameterInputField.value * 100 - 20).toFixed(0);
+    const IL = (parameterInputField.value * 100).toFixed(0);
+    if (data[litologySelect.value].cohesion === "niespoiste") {
+      showParameters(ID);
+    } else {
+      showParameters(IL);
+    }
+  } catch (err) {
+    console.error(err);
+    const errorMessage = document.createElement("div")
+    errorMessage.classList.add("message");
+    
+    if( data[litologySelect.value].cohesion === "niespoiste" && (parameterInputField.value < 0.20 || parameterInputField.value > 1.00)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    } else if(data[litologySelect.value].cohesion === "spoiste" && (parameterInputField.value < 0.00 || parameterInputField.value > 0.75)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    }
+
+    document.body.appendChild(errorMessage);
+    setTimeout(() => {
+      document.body.removeChild(errorMessage)        
+    }, 1500);
   }
 }
 
 /* events */
 
-litologyButton.addEventListener("click", function () {
+litologySelect.addEventListener("click", function () {
   clearParameters();
 });
 
