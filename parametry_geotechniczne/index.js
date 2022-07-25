@@ -1,20 +1,24 @@
 // relations
-const buttonSpoisty = document.getElementById("button-spoisty")
-const buttonNiespoisty = document.getElementById("button-niespoisty")
-const buttonOblicz = document.getElementById("button-oblicz")
-const outputC = document.getElementById("output-c")
-const outputFi = document.getElementById("output-fi")
-const outputM0 = document.getElementById("output-M0")
-const outputE0 = document.getElementById("output-E0")
-const litologySelect = document.getElementById("litology")
-const parameterInputField = document.getElementById("parameter-input-field")
-const parameterInputFieldLabel = document.getElementById("parameter-input-field-label")
-const parameterInputFieldRange = document.getElementById("parameter-input-field-range")
+const buttonSpoisty = document.getElementById("button-spoisty");
+const buttonNiespoisty = document.getElementById("button-niespoisty");
+const buttonOblicz = document.getElementById("button-oblicz");
+const outputC = document.getElementById("output-c");
+const outputFi = document.getElementById("output-fi");
+const outputM0 = document.getElementById("output-M0");
+const outputE0 = document.getElementById("output-E0");
+const litologySelect = document.getElementById("litology-select");
+const parameterInputField = document.getElementById("parameter-input-field");
+const parameterInputFieldLabel = document.getElementById(
+  "parameter-input-field-label"
+);
+const parameterInputFieldRange = document.getElementById(
+  "parameter-input-field-range"
+);
 
 //database
-import {data} from './data.js'
+import { data } from "./data.js";
 
-// Data: position in array parallels to ID / IL parameter. 
+// Data: position in array parallels to ID / IL parameter.
 // Relation is fixed on equation:
 // a = ((parameterInputField * 100) -20), a - position in array for gruntyNiespoiste category
 // b = (parameterInputField * 100), b - position in array for gruntySpoiste category
@@ -22,70 +26,81 @@ import {data} from './data.js'
 /* functions */
 
 function generateOptions(cohesion, parameter, minRange, maxRange) {
-    litologySelect.innerHTML = ""
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].cohesion === cohesion) {
-            let Opt= new Option (data[i].litology,i)
-            litologySelect.add(Opt)
-        }
+  litologySelect.textContent = "";
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].cohesion === cohesion) {
+      const option = new Option(data[i].litology, i);
+      litologySelect.add(option);
     }
-    parameterInputFieldLabel.textContent = `Wprowadź stopień ${parameter}:`
-    parameterInputFieldRange.innerHTML = `Wartość w przedziale:<br>od ${minRange} do ${maxRange}`
+  }
+  parameterInputFieldLabel.textContent = `Wprowadź stopień ${parameter}:`;
+  parameterInputFieldRange.textContent = `Wartość w przedziale: od ${minRange.toFixed(2)} do ${maxRange.toFixed(2)}`;
 }
 
-
 function showParameters(param) {
-  const litologySelectValue = litologySelect.value
-
-  outputC.innerHTML = data[litologySelectValue].parameters[param].C
-  outputFi.innerHTML = data[litologySelectValue].parameters[param].Fi
-  outputM0.innerHTML = data[litologySelectValue].parameters[param].M0
-  outputE0.innerHTML = data[litologySelectValue].parameters[param].E0
+  outputC.textContent = data[litologySelect.value].parameters[param].C;
+  outputFi.textContent = data[litologySelect.value].parameters[param].Fi;
+  outputM0.textContent = data[litologySelect.value].parameters[param].M0;
+  outputE0.textContent = data[litologySelect.value].parameters[param].E0;
 }
 
 function clearParameters() {
-  outputC.innerHTML = "-"
-  outputFi.innerHTML = "-"
-  outputM0.innerHTML = "-"
-  outputE0.innerHTML = "-"
+  outputC.textContent = "-";
+  outputFi.textContent = "-";
+  outputM0.textContent = "-";
+  outputE0.textContent = "-";
 }
 
-function renderParameters(){
-  const litologySelectValue = litologySelect.value
-  const ID = (parameterInputField.value*100-20).toFixed(0)
-  const IL = (parameterInputField.value*100).toFixed(0)
-    if (data[litologySelectValue].cohesion === "niespoiste") {
-        showParameters(ID)
+function renderParameters() {
+  try{
+    const ID = (parameterInputField.value * 100 - 20).toFixed(0);
+    const IL = (parameterInputField.value * 100).toFixed(0);
+    if (data[litologySelect.value].cohesion === "niespoiste") {
+      showParameters(ID);
     } else {
-        showParameters(IL)
+      showParameters(IL);
     }
+  } catch (err) {
+    console.error(err);
+    const errorMessage = document.createElement("div")
+    errorMessage.classList.add("message");
+    
+    if( data[litologySelect.value].cohesion === "niespoiste" && (parameterInputField.value < 0.20 || parameterInputField.value > 1.00)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    } else if(data[litologySelect.value].cohesion === "spoiste" && (parameterInputField.value < 0.00 || parameterInputField.value > 0.75)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    }
+
+    document.body.appendChild(errorMessage);
+    setTimeout(() => {
+      document.body.removeChild(errorMessage)        
+    }, 1500);
+  }
 }
 
 /* events */
 
-litologySelect.addEventListener("click", function() {
-  clearParameters()
-})
+litologySelect.addEventListener("click", function () {
+  clearParameters();
+});
 
-parameterInputField.addEventListener("keydown",(event) => {
-  if (event.key === "Enter"){
-    event.preventDefault()
-    renderParameters()
-  } else if (event.key === "Backspace"){
-    clearParameters()
+parameterInputField.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    renderParameters();
+  } else if (event.key === "Backspace") {
+    clearParameters();
   }
-})
+});
 
-buttonSpoisty.addEventListener("click", function(){
-    generateOptions("spoiste", "plastyczności", 0.00, 0.75)
-    clearParameters()
-})
+buttonSpoisty.addEventListener("click", function () {
+  generateOptions("spoiste", "plastyczności", 0.0, 0.75);
+  clearParameters();
+});
 
-buttonNiespoisty.addEventListener("click", function(){
-    generateOptions("niespoiste", "zagęszczenia", 0.20, 1.00)
-    clearParameters()
-})
+buttonNiespoisty.addEventListener("click", function () {
+  generateOptions("niespoiste", "zagęszczenia", 0.2, 1.0);
+  clearParameters();
+});
 
-
-buttonOblicz.addEventListener("click", renderParameters)
-
+buttonOblicz.addEventListener("click", renderParameters);
