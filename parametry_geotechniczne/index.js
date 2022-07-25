@@ -64,7 +64,13 @@ function renderParameters() {
     console.error(err);
     const errorMessage = document.createElement("div")
     errorMessage.classList.add("message");
-    errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    
+    if( data[litologySelect.value].cohesion === "niespoiste" && (parameterInputField.value < 0.20 || parameterInputField.value > 1.00)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    } else if(data[litologySelect.value].cohesion === "spoiste" && (parameterInputField.value < 0.00 || parameterInputField.value > 0.75)) {
+      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+    }
+
     document.body.appendChild(errorMessage);
     setTimeout(() => {
       document.body.removeChild(errorMessage)        
