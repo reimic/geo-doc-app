@@ -73,6 +73,38 @@ header p:first-child {
     word-wrap: normal !important;
     white-space: normal;
 }
+.message--basic{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CB997E;
+    width: 50%;
+    min-height: 3rem;
+    z-index: 10;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 2rem;
+    left: 25%;
+    animation: message--basic--animation 3s;
+}
+
+@keyframes message--basic--animation {
+    0% {
+        opacity: 0;
+    }
+    35% {
+        opacity: 1;
+        transform: scale(1.04,1.01);
+    }
+    85% {
+        opacity: 1;
+        transform: scale(1.05,1.02);   
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.05,1.02);
+    }
+  }
 
 @media (min-width: 768px) {
     .containter--basic {

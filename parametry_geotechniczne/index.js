@@ -62,19 +62,16 @@ function renderParameters() {
     }
   } catch (err) {
     console.error(err);
-    const errorMessage = document.createElement("div")
-    errorMessage.classList.add("message");
-    
-    if( data[litologySelect.value].cohesion === "niespoiste" && (parameterInputField.value < 0.20 || parameterInputField.value > 1.00)) {
+    if(!document.querySelector(".message--basic")){
+      const errorMessage = document.createElement("div")
+      document.body.appendChild(errorMessage);
+      errorMessage.classList.add("message--basic");
       errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
-    } else if(data[litologySelect.value].cohesion === "spoiste" && (parameterInputField.value < 0.00 || parameterInputField.value > 0.75)) {
-      errorMessage.textContent = "Wpisana wartość nie zawiera się w wymaganym przedziale.";
+      
     }
-
-    document.body.appendChild(errorMessage);
     setTimeout(() => {
-      document.body.removeChild(errorMessage)        
-    }, 1500);
+      document.body.removeChild(document.querySelector(".message--basic"))
+    }, 3000);
   }
 }
 
